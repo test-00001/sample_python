@@ -25,3 +25,8 @@ script:
 notifications:
   email:
    - exampleone@org.com
+
+
+matrix:
+ allow_failures:
+   - python: 3.2
