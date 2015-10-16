@@ -1,12 +1,12 @@
 language: python
 #build_image: shippableimages/ubuntu1204_python
 python:
-  - 2.6
-  - 2.7
+ # - 2.6
+  #- 2.7
   - 3.2
   - 3.3
-  - 3.4
-  - pypy
+  #- 3.4
+  #- pypy
 
 install:
   - pip install -r requirements.txt
@@ -19,8 +19,14 @@ before_script:
 script:
   - which python
   - coverage run `which nosetests` test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+  - which python && coverage run --branch test.py
   - coverage xml -o shippable/codecoverage/coverage.xml
 
 notifications:
   email:
    - exampleone@org.com
+
+
+matrix:
+ allow_failures:
+   - python: "3.2"
